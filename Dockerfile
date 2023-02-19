@@ -1,15 +1,4 @@
-FROM golang:1.17 as builder
-
-RUN apk add --no-cache make git
-RUN git clone https://github.com/Lepidopteron/micromdm.git /go/src/github.com/micromdm/micromdm
-
-
-
-
-
-
-
-FROM alpine
+FROM alpine:latest
 
 ENV MICROMDM_VERSION="1.10.1"
 ENV MICROMDM_CONFIG_DIR="/data/config"
