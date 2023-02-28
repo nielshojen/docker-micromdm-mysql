@@ -18,7 +18,17 @@ if [[ ${MICROMDM_REPO_DIR} ]]; then
 fi
 
 
-execServe="/usr/local/bin/micromdm serve -server-url=${MICROMDM_SERVER_URL} -filerepo ${MICROMDM_REPO_DIR} -config-path ${MICROMDM_CONFIG_DIR}"
+execServe="/usr/local/bin/micromdm serve -server-url=${MICROMDM_SERVER_URL}"
+
+# filerepo
+if [[ ! ${MICROMDM_FILE_REPO} ]]; then
+  execServe="${execServe} -filerepo ${MICROMDM_REPO_DIR}"
+fi
+
+# config-path
+if [[ ! ${MICROMDM_RDBMS} ]]; then
+  execServe="${execServe} -config-path ${MICROMDM_CONFIG_DIR}
+fi
 
 # add psql connection
 if [[ ${PG_HOST} ]] && [[ ${PG_USER} ]] && [[ ${PG_PASS} ]] && [[ ${PG_DBNAME} ]]; then
