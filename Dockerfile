@@ -14,11 +14,7 @@ RUN make
 
 FROM alpine
 
-ENV MICROMDM_CONFIG_DIR="/data/config"
-ENV MICROMDM_CERTS_DIR="/data/certs"
-ENV MICROMDM_REPO_DIR="/data/repo"
-
-VOLUME "/data"
+VOLUME "/repo"
 
 COPY docker-entrypoint.d /docker-entrypoint.d
 COPY docker-entrypoint.sh /docker-entrypoint.sh
@@ -28,7 +24,6 @@ COPY --from=builder /go/src/github.com/micromdm/micromdm/build/linux/micromdm /u
 COPY --from=builder /go/src/github.com/micromdm/micromdm/build/linux/mdmctl /usr/local/bin/
 RUN chmod a+x /usr/local/bin/micromdm
 RUN chmod a+x /usr/local/bin/mdmctl
-RUN mkdir -p ${MICROMDM_CONFIG_DIR} ${MICROMDM_CERTS_DIR} ${MICROMDM_REPO_DIR}
 RUN chmod +x /docker-entrypoint.d/*.sh
 RUN chmod a+x /docker-entrypoint.sh
 

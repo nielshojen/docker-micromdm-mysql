@@ -2,37 +2,11 @@
 
 echo "Waiting to make sure storage is up"
 
-sleep 30
-
-# Make sure we have the needed folders
-if [[ ${MICROMDM_CONFIG_DIR} ]]; then
-  mkdir -p ${MICROMDM_CONFIG_DIR}
-fi
-
-if [[ ${MICROMDM_CERTS_DIR} ]]; then
-  mkdir -p ${MICROMDM_CERTS_DIR}
-fi
-
-if [[ ${MICROMDM_REPO_DIR} ]]; then
-  mkdir -p ${MICROMDM_REPO_DIR}
-fi
-
-
 execServe="/usr/local/bin/micromdm serve -server-url=${MICROMDM_SERVER_URL}"
 
 # filerepo
 if [[ ! ${MICROMDM_FILE_REPO} ]]; then
-  execServe="${execServe} -filerepo ${MICROMDM_REPO_DIR}"
-fi
-
-# config-path
-if [[ ! ${MICROMDM_RDBMS} ]]; then
-  execServe="${execServe} -config-path ${MICROMDM_CONFIG_DIR}"
-fi
-
-# add psql connection
-if [[ ${PG_HOST} ]] && [[ ${PG_USER} ]] && [[ ${PG_PASS} ]] && [[ ${PG_DBNAME} ]]; then
-  execServe="${execServe} psql --host=${PG_HOST} --port=5432 --username=${PG_USER} --dbname=${PG_DBNAME} --password=${PG_PASS}"
+  execServe="${execServe} -filerepo /repo"
 fi
 
 # add api key if specified

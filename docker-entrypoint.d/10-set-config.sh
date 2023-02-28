@@ -10,7 +10,7 @@ else
   execServe="${execServe} -api-token ${API_KEY}"
 fi
 
-if [[ ${MICROMDM_NAME} =]]; then
+if [[ ${MICROMDM_NAME} ]]; then
   execServe="${execServe} -name ${MICROMDM_NAME}"
 else
   execServe="${execServe} -name production"
