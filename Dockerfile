@@ -30,4 +30,4 @@ RUN chmod a+x /usr/local/bin/mdmctl
 EXPOSE 80 443 8080
 
 #ENTRYPOINT ["/docker-entrypoint.sh"]
-ENTRYPOINT [/usr/local/bin/micromdm", "serve"]
+ENTRYPOINT ["/usr/local/bin/micromdm", "serve"]
