@@ -16,18 +16,17 @@ FROM alpine
 
 VOLUME "/repo"
 
-COPY docker-commands.d /docker-commandst.d
-COPY docker-commands.sh /docker-commands.sh
+COPY docker-entrypoint.d /docker-entrypoint.d
+COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 RUN apk --update add ca-certificates
 COPY --from=builder /go/src/github.com/micromdm/micromdm/build/linux/micromdm /usr/local/bin/
 COPY --from=builder /go/src/github.com/micromdm/micromdm/build/linux/mdmctl /usr/local/bin/
 RUN chmod a+x /usr/local/bin/micromdm
 RUN chmod a+x /usr/local/bin/mdmctl
-RUN chmod +x /docker-commands.d/*.sh
-RUN chmod a+x /docker-commands.sh
+RUN chmod +x /docker-entrypoint.d/*.sh
+RUN chmod a+x /docker-entrypoint.sh
 
 EXPOSE 80 443 8080
 
-ENTRYPOINT ["/usr/local/bin/micromdm", "serve"]
-CMD ["/docker-commands.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
