@@ -27,7 +27,7 @@ fi
 
 # config-path
 if [[ ! ${MICROMDM_RDBMS} ]]; then
-  execServe="${execServe} -config-path ${MICROMDM_CONFIG_DIR}
+  execServe="${execServe} -config-path ${MICROMDM_CONFIG_DIR}"
 fi
 
 # add psql connection
