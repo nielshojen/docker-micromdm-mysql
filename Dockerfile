@@ -1,7 +1,7 @@
 FROM golang:alpine as builder
 
 RUN apk add --no-cache make git
-RUN git clone https://github.com/Lepidopteron/micromdm.git /go/src/github.com/micromdm/micromdm && git -C /go/src/github.com/micromdm/micromdm checkout tags/v1.10.1
+RUN git clone https://github.com/Lepidopteron/micromdm.git /go/src/github.com/micromdm/micromdm
 
 WORKDIR /go/src/github.com/micromdm/micromdm/
 
