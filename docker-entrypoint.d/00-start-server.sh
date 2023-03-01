@@ -1,3 +1,5 @@
 #!/bin/sh
 
-/usr/local/bin/micromdm serve &
+execServe="/usr/local/bin/micromdm serve"
+
+$execServe &
